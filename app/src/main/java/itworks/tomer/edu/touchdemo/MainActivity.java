@@ -3,13 +3,17 @@ package itworks.tomer.edu.touchdemo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+    private PaintView paintView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new DroidView(this));
+        setContentView(R.layout.activity_main);
+        paintView = (PaintView)findViewById(R.id.paintView);
     }
 
     @Override
@@ -32,5 +36,13 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(event.getX());
         System.out.println(event.getY());
         return true;
+    }
+
+    public void clear(View view) {
+        paintView.clear();
+    }
+
+    public void red(View view) {
+        paintView.changeColor("red");
     }
 }

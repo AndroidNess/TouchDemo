@@ -7,28 +7,25 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * Created by Dev on 19/04/2016.
- */
-public class DroidView extends View {
-    private final int width;
-    private final int height;
-    float x, y;
-    private final Bitmap hat;
 
+public class DroidView extends View {
+    private final int width, height;
+    float x, y;
+
+    private final Bitmap hat, face, mustache;
     public DroidView(Context context) {
         super(context);
         hat = BitmapFactory.decodeResource(getResources(), R.drawable.hat);
+        face = BitmapFactory.decodeResource(getResources(), R.drawable.face);
+        mustache = BitmapFactory.decodeResource(getResources(), R.drawable.mustache);
         width = hat.getWidth();
         height = hat.getHeight();
     }
-
-    @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(hat, x, y, null);
+        canvas.drawBitmap(hat, x +200, y+200, null);
+        canvas.drawBitmap(face, x, y, null);
+        canvas.drawBitmap(mustache, x, y, null);
     }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (testColision(event)) {
             x = event.getX() - width / 2;
@@ -37,7 +34,6 @@ public class DroidView extends View {
         }
         return true;
     }
-
      private boolean testColision(MotionEvent e){
         boolean isXcolision = e.getX() <= x + width && e.getX() >= x;
         boolean isYcolision = e.getY() <= y + height && e.getY() >= y;
